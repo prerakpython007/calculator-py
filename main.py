@@ -8,7 +8,7 @@ def add_to_calculation(symbol):
     text_result.delete(1.0 , "end")
     text_result.insert(1.0 , calculation)
 
-def evaluate_calculation():
+def evaluate_calculation(event=None):
     global calculation
     try:
         result = str(eval(calculation))
@@ -25,11 +25,28 @@ def clear_field():
     calculation = ""
     text_result.delete(1.0 , "end")
 
+def backspace():
+    global calculation
+    calculation = calculation[:-1]
+    text_result.delete(1.0 , "end")
+    text_result.insert(1.0 , calculation)
+
+def key_press(event):
+    key = event.char
+    if key in '0123456789+-*/()':
+        add_to_calculation(key)
+    elif key == '\r':
+        evaluate_calculation()
+    elif key == '\x08':  # Backspace key
+        backspace()
+
 root = tk.Tk()
 root.geometry("300x300")
 root.title("Modern Calculator")
 root.configure(bg="#4b4b4b")  # Darker shade of gray
 root.resizable(False, False)  # Disable window resizing
+
+root.bind("<Key>", key_press)
 
 text_result = tk.Text(root, height=2, width=16, font=("Arial", 24), bg="white", fg="black", bd=0)
 text_result.grid(columnspan=5, padx=5, pady=5)
