@@ -35,7 +35,7 @@ text_result = tk.Text(root, height=2, width=16, font=("Arial", 24), bg="white", 
 text_result.grid(columnspan=5, padx=5, pady=5)
 
 btn_color_num = "#d3d3d3"
-btn_color_op = "#4682b4"
+btn_color_op = "#8 754b4"
 border_color = "white"
 
 button_options = {
